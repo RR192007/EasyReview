@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Books
+{% endblock %}
+
+{% block body %}
+    <h1>Search </h1>
+
+    <table>
+      <tr>
+      <th>ISBN</th>
+      <th>TITLE</th>
+      <th>AUTHOR</th>
+      <th>YEAR</th>
+      </tr>
+    {% for book in books %}
+      <tr>
+      <td><a href="{{url_for('singlebookinfo', book_isbn=book.isbn)}}">{{book.isbn}}</a></td>
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.year}}</td>
+      </tr>
+    {%else%}
+    ERROR! BOOK NOT FOUND!<br><br>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    {% endfor %}
+    </table>
+{% endblock %}

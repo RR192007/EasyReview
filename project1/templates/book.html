@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block body %}
+    <h1>Book Details</h1>
+    <ul>
+        <li>ISBN: {{isbn}}</li>
+        <li>TITLE: {{ title }}</li>
+        <li>AUTHOR: {{ author }}</li>
+        <li>YEAR: {{ year }}</li>
+    </ul>
+    <h2>Reviews</h2>
+    <hr>
+    Number of ratings received: {{workratingscount}}<br>
+    Average rating: {{averagescore}}
+    <hr>
+    <ul>
+        {% for Review in reviews %}
+            <li><b>Reader: </b>{{ Review.member_username }}</li>
+            <li><b>Rating: </b>{{ Review.rating }}</li>
+            <li><b>Review: </b>{{ Review.review }}</li>
+            <hr>
+        {% else %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+    <form action="{{url_for ('insertreview')}}" method="post">
+      <input type="text" name="txtusername" placeholder= "For authorisation, enter username. Sign up otherwise">
+      <input type="password" name="txtpassword" placeholder="Enter account password">
+      <input type="text" name="txtisbn" value={{isbn}}>
+      <input type="text" name="txtrating" placeholder="On a scale of 1 to 5, how will you rate this book?">
+      <input type="text" name="txtreview" placeholder="Enter review">
+      <input type="submit" value="POST">
+    </form>
+{% endblock %}
